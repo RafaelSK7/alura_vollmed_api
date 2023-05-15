@@ -8,8 +8,6 @@ import med.voll.api.domain.medico.Especialidade;
 
 import java.time.LocalDateTime;
 
-// Trecho de código suprimido
-
 public record DadosAgendamentoConsulta(
         @JsonAlias("produto_id") Long idMedico,
 

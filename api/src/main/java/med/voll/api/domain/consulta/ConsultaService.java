@@ -50,4 +50,8 @@ public class ConsultaService {
     }
 
 
+    public void cancelar(DadosCancelamentoConsulta dados) {
+
+
+    }
 }

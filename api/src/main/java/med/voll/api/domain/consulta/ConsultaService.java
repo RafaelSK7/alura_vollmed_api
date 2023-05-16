@@ -8,6 +8,10 @@ import med.voll.api.domain.paciente.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Service
 public class ConsultaService {
 
@@ -51,7 +55,11 @@ public class ConsultaService {
 
 
     public void cancelar(DadosCancelamentoConsulta dados) {
-
-
+        var consulta = consultaRepository.getReferenceById(dados.idConsulta());
+        var agora = LocalDateTime.now();
+        var diferencaEmHoras = Duration.between(agora, consulta.getData()).toHours();
+        if (diferencaEmHoras < 24){
+            throw new ValidacaoException("Uma consulta somente poderá ser cancelada com antecedência mínima de 24 horas.");
+        }
     }
 }

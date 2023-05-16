@@ -11,7 +11,5 @@ public record DadosCancelamentoConsulta(
         @NotNull
         MotivoCancelamento motivo
 
-
-
 ) {
 }

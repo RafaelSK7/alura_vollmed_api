@@ -3,9 +3,13 @@ package med.voll.api.domain.consulta.validacoes;
 import med.voll.api.domain.ValidacaoException;
 import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
 import med.voll.api.domain.paciente.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class ValidadosPacienteAtivo {
+@Component
+public class ValidadosPacienteAtivo implements InterfaceValidadoraAgendamento {
 
+    @Autowired
     private PacienteRepository repository;
 
     public void validar(DadosAgendamentoConsulta dados){
@@ -14,5 +18,4 @@ public class ValidadosPacienteAtivo {
             throw new ValidacaoException("Consulta não pode ser agendada com paciente excluido.");
         }
     }
-
 }

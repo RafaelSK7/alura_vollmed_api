@@ -1,4 +1,4 @@
-package med.voll.api.domain.consulta.validacoes;
+package med.voll.api.domain.consulta.validacoes.agendamento;
 
 import med.voll.api.domain.ValidacaoException;
 import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
@@ -13,7 +13,7 @@ public class ValidadorHorarioFuncionamentoClinica implements InterfaceValidadora
 
         var dataConsulta = dados.data();
 
-        var domingo = dataConsulta.getDayOfWeek().equals(DayOfWeek.MONDAY);
+        var domingo = dataConsulta.getDayOfWeek().equals(DayOfWeek.SUNDAY);
         var antesDaAberturaDaClinica = dataConsulta.getHour() < 7;
         var depoisDoEncerramentoDaClinica = dataConsulta.getHour() > 18;
 

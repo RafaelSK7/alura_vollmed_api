@@ -1,8 +1,6 @@
 package med.voll.api.controller;
 
-import med.voll.api.domain.consulta.ConsultaService;
-import med.voll.api.domain.consulta.DadosAgendamentoConsulta;
-import med.voll.api.domain.consulta.DadosDetalhamentoConsulta;
+import med.voll.api.domain.consulta.*;
 import med.voll.api.domain.medico.Especialidade;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,6 +35,7 @@ class ConsultaControllerTest {
 
     @Autowired
     private JacksonTester<DadosDetalhamentoConsulta> dadosDetalhamentoConsultaJson;
+    private JacksonTester<DadosCancelamentoConsulta> dadosCancelamentoConsultaJson;
 
     @MockBean
     private ConsultaService service;
@@ -83,6 +82,22 @@ class ConsultaControllerTest {
 
 
     @Test
-    void cancelarConsulta() {
+    @DisplayName("Deveria devolver codigo http 200 quando informacoes estao validas")
+    @WithMockUser
+    void cancelar_cenario1() throws Exception {
+
+        var dadosCancelamentoConsulta = new DadosCancelamentoConsulta(null, MotivoCancelamento.OUTROS);
+
+        var response = mvc.perform(
+                        post("/cancelar")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(dadosCancelamentoConsultaJson.write(
+                                        dadosCancelamentoConsulta
+                                ).getJson())
+                )
+                .andReturn()
+                .getResponse();
+
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
     }
 }
